@@ -29,6 +29,13 @@ SKSEPlugin_Add(
 		src/PCH/PCH.h
 )
 
+install(
+	FILES
+		"${PROJECT_SOURCE_DIR}/data/Interface/constructibleobjectmenu.swf"
+	DESTINATION
+		"Interface"
+)
+
 set(CPACK_GENERATOR "7Z")
 set(CPACK_PACKAGE_FILE_NAME ${PROJECT_NAME}-${PROJECT_VERSION})
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY FALSE)
