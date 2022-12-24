@@ -5,11 +5,15 @@ import skyui.filter.IFilter;
 
 class skyui.filter.ItemTypeFilter implements IFilter
 {
+	static var MODE_BITFLAGS: Number = 0;
+	static var MODE_PARTITIONED: Number = 1;
+	static var MODE_TIERED: Number = 2;
+
   /* PRIVATE VARIABLES */
 
 	private var _matcherFunc:Function;
-	
-	
+
+
   /* PROPERTIES */
 
 	private var _itemFilter: Number = 0xFFFFFFFF;
@@ -25,11 +29,11 @@ class skyui.filter.ItemTypeFilter implements IFilter
 	public function ItemTypeFilter()
 	{
 		EventDispatcher.initialize(this);
-		
+
 		_matcherFunc = entryMatchesFilter;
 	}
-	
-	
+
+
   /* PUBLIC FUNCTIONS */
 
 	// @mixin by gfx.events.EventDispatcher
@@ -40,23 +44,31 @@ class skyui.filter.ItemTypeFilter implements IFilter
 	public var removeEventListener: Function;
 	public var removeAllEventListeners: Function;
 	public var cleanUpEvents: Function;
-	
+
 	public function changeFilterFlag(a_newFilter:Number, a_bDoNotUpdate: Boolean): Void
 	{
 		if (a_bDoNotUpdate == undefined)
 			a_bDoNotUpdate = false;
-		
+
 		_itemFilter = a_newFilter;
-		
+
 		if (!a_bDoNotUpdate)
 			dispatchEvent({type:"filterChange"});
 	}
 
-	public function setPartitionedFilterMode(a_bPartition: Boolean): Void
+	public function setFilterMode(a_mode: Number): Void
 	{
-		_matcherFunc = a_bPartition ? entryMatchesPartitionedFilter : entryMatchesFilter;
+		if (a_mode == MODE_BITFLAGS) {
+			_matcherFunc = entryMatchesFilter;
+		}
+		else if (a_mode == MODE_PARTITIONED) {
+			_matcherFunc = entryMatchesPartitionedFilter;
+		}
+		else if (a_mode == MODE_TIERED) {
+			_matcherFunc = entryMatchesTieredFilter;
+		}
 	}
-	
+
 	// @override skyui.IFilter
 	public function applyFilter(a_filteredList: Array): Void
 	{
@@ -67,15 +79,15 @@ class skyui.filter.ItemTypeFilter implements IFilter
 			}
 		}
 	}
-	
+
 	public function isMatch(a_entry: Object, a_flag): Boolean
 	{
 		return _matcherFunc(a_entry, a_flag);
 	}
-	
-	
+
+
   /* PRIVATE FUNCTIONS */
-	
+
 	public static function entryMatchesFilter(a_entry: Object, a_flag: Boolean): Boolean
 	{
 		return a_entry != undefined &&
@@ -86,16 +98,30 @@ class skyui.filter.ItemTypeFilter implements IFilter
 	{
 		if (a_entry == undefined)
 			return false;
-			
+
 		if (a_flag == 0xFFFFFFFF)
 			return true;
-			
+
 		var flag: Number = a_entry.filterFlag;
 		var byte0: Number = (flag & 0x000000FF);
 		var byte1: Number = (flag & 0x0000FF00) >>> 8;
 		var byte2: Number = (flag & 0x00FF0000) >>> 16;
 		var byte3: Number = (flag & 0xFF000000) >>> 24;
-		
+
 		return byte0 == a_flag || byte1 == a_flag || byte2 == a_flag || byte3 == a_flag;
+	}
+
+	private static function entryMatchesTieredFilter(a_entry: Object, a_flag: Number): Boolean
+	{
+		if (a_entry == undefined)
+			return false;
+
+		if (a_flag == 0xFFFFFFFF)
+			return true;
+
+		var flag: Number = a_entry.filterFlag;
+		var section: Number = (flag & 0xFF000000);
+
+		return section == a_flag || flag == a_flag;
 	}
 }

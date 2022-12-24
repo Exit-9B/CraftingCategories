@@ -1,5 +1,6 @@
 #include "Crafting.h"
 
+#include "Data/CategoryManager.h"
 #include "RE/Offset.h"
 
 namespace Hooks
@@ -7,6 +8,7 @@ namespace Hooks
 	void Crafting::Install()
 	{
 		LoadMoviePatch();
+		CustomCategoryPatch();
 	}
 
 	void Crafting::LoadMoviePatch()
@@ -27,6 +29,20 @@ namespace Hooks
 		auto& trampoline = SKSE::GetTrampoline();
 		_IsFurniture = trampoline.write_call<5>(hook1.address(), &Crafting::CheckFurniture);
 		_LoadMovie = trampoline.write_call<5>(hook2.address(), &Crafting::LoadMovie);
+	}
+
+	void Crafting::CustomCategoryPatch()
+	{
+		static const auto hook = REL::Relocation<std::uintptr_t>(
+			RE::Offset::CraftingSubMenus::ConstructibleObjectMenu::UpdateItemList,
+			0x2C8);
+
+		if (!REL::make_pattern<"E8">().match(hook.address())) {
+			util::report_and_fail("Failed to install Crafting::CustomCategoryPatch"sv);
+		}
+
+		auto& trampoline = SKSE::GetTrampoline();
+		_SetItemEntryData = trampoline.write_call<5>(hook.address(), &Crafting::SetItemEntryData);
 	}
 
 	bool Crafting::CheckFurniture(RE::TESObjectREFR* a_refr)
@@ -67,5 +83,37 @@ namespace Hooks
 			fileName,
 			a_mode,
 			a_backgroundAlpha);
+	}
+
+	void Crafting::SetItemEntryData(
+		RE::CraftingSubMenus::ConstructibleObjectMenu* a_menu,
+		RE::BSTArray<RE::CraftingSubMenus::ConstructibleObjectMenu::ItemEntry>& a_entries)
+	{
+		_SetItemEntryData(a_menu, a_entries);
+
+		auto& entryList = a_menu->entryList;
+		assert(entryList.GetArraySize() == a_entries.size());
+
+		auto categoryManager = Data::CategoryManager::GetSingleton();
+
+		categoryManager->ResetFlags();
+
+		for (std::uint32_t i = 0; i < a_entries.size(); i++) {
+			RE::GFxValue entryObject;
+			entryList.GetElement(i, &entryObject);
+
+			categoryManager->ProcessEntry(
+				entryObject,
+				a_entries[i].constructibleObject->createdItem);
+		}
+
+		RE::BSTArray<RE::GFxValue> categoryArgs;
+		categoryManager->GetCategoryArgs(categoryArgs);
+
+		a_menu->view->Invoke(
+			"Menu.InventoryLists.SetCustomConstructCategories",
+			nullptr,
+			categoryArgs.data(),
+			categoryArgs.size());
 	}
 }

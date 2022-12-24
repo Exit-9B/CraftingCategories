@@ -150,27 +150,20 @@ class CraftingLists extends MovieClip
 
 		// Alchemy uses a different layout
 		if (_subtypeName == "Alchemy") {
-			panelContainer.gotoAndStop("no_categories");
-
 			// Hide top icon category bar, use effects list instead
-			CategoriesList._visible = false;
-			CategoriesList = panelContainer.effectsList;
-			CategoriesList._visible = true;
-
-
-			itemList.gotoAndStop("short");
-			itemList.leftBorder = SHORT_LIST_OFFSET;
-			itemList.listHeight = 560;
+			setTopBarVisible(false);
+			setEffectsListVisible(true);
 
 		// Support for custom categorization
 		} else if (_subtypeName == "ConstructibleObject") {
-			itemList.addDataProcessor(new CustomConstructDataSetter());
+			setTopBarVisible(false);
+			setEffectsListVisible(true);
+
+			setFilterMode(ItemTypeFilter.MODE_TIERED);
 
 		// Smithing doesn't need top icon categories
 		} else if (_subtypeName == "Smithing") {
-			panelContainer.gotoAndStop("no_categories");
-			CategoriesList._visible = false;
-			itemList.listHeight = 560;
+			setTopBarVisible(false);
 		}
 
 		var listEnumeration = new FilteredEnumeration(itemList.entryList);
@@ -252,9 +245,88 @@ class CraftingLists extends MovieClip
 		itemList.setPlatform(a_platform,a_bPS3Switch);
 	}
 
-	public function setPartitionedFilterMode(a_bPartitioned: Boolean): Void
+	public function setTopBarVisible(a_visible: Boolean): Void
 	{
-		_typeFilter.setPartitionedFilterMode(a_bPartitioned);
+		if (a_visible) {
+			panelContainer.gotoAndStop("default");
+			CategoriesList = panelContainer.categoriesList;
+			CategoriesList._visible = true;
+			itemList.listHeight = 514;
+		}
+		else {
+			panelContainer.gotoAndStop("no_categories");
+			panelContainer.categoriesList._visible = false;
+			itemList.listHeight = 560;
+		}
+	}
+
+	public function setEffectsListVisible(a_visible: Boolean): Void
+	{
+		if (a_visible) {
+			CategoriesList = panelContainer.effectsList;
+			CategoriesList._visible = true;
+			itemList.gotoAndStop("short");
+			itemList.leftBorder = SHORT_LIST_OFFSET;
+		}
+		else {
+			panelContainer.effectsList._visible = false;
+			itemList.gotoAndStop("long");
+			itemList.leftBorder = 0;
+		}
+	}
+
+	public function setFilterMode(a_mode: Number): Void
+	{
+		_typeFilter.setFilterMode(a_mode);
+	}
+
+	private function categoryCompare(a_cat1: Object, a_cat2: Object): Number
+	{
+		if (a_cat1.priority < a_cat2.priority) {
+			return -1;
+		}
+
+		if (a_cat1.priority > a_cat2.priority) {
+			return 1;
+		}
+
+		var flag1 = a_cat1.flag;
+		var flag2 = a_cat2.flag;
+
+		if ((flag1 & 0xFF000000) == (flag2 & 0xFF000000)) {
+			if ((flag1 & 0x00FFFFFF) && (flag2 & 0x00FFFFFF)) {
+				var text1 = Translator.translate(a_cat1.text);
+				var text2 = Translator.translate(a_cat2.text);
+
+				if (text1 < text2 || ((flag2 & 0x00FFFFFF) == 0x1)) {
+					return -1;
+				}
+
+				if (text1 > text2 || ((flag1 & 0x00FFFFFF) == 0x1)) {
+					return 1;
+				}
+
+				return 0;
+			}
+
+			if ((flag2 & 0x00FFFFFF)) {
+				return -1;
+			}
+
+			if ((flag1 & 0x00FFFFFF)) {
+				return 1;
+			}
+		}
+
+		if (flag1 < flag2) {
+			return -1;
+		}
+
+		if (flag1 > flag2) {
+			return 1;
+		}
+
+		return 0;
 	}
 
 	// @GFx
@@ -310,7 +382,7 @@ class CraftingLists extends MovieClip
 			}
 		}
 
-		if (_subtypeName == "Alchemy") {
+		if (panelContainer.effectsList._visible) {
 			if (handleAlchemyNavigation(details, pathToFocus))
 				return true;
 		} else {
@@ -377,7 +449,7 @@ class CraftingLists extends MovieClip
 	{
 		_currCategoryIndex = CategoriesList.selectedIndex;
 
-		categoryLabel.textField.SetText(CategoriesList.selectedEntry.text.toUpperCase());
+		categoryLabel.textField.SetText(Translator.translate(CategoriesList.selectedEntry.text).toUpperCase());
 
 		// Start with no selection
 		itemList.selectedIndex = -1;
@@ -432,6 +504,33 @@ class CraftingLists extends MovieClip
 		preprocessCategoriesList();
 
 		CategoriesList.selectedIndex = 0;
+		CategoriesList.InvalidateData();
+	}
+
+	// CraftingCategories: Called to set custom categories.
+	public function SetCustomConstructCategories(): Void
+	{
+		var textOffset = 0;
+		var flagOffset = 1;
+		var priorityOffset = 2;
+		var len = 3;
+
+		CategoriesList.clearList();
+
+		for (var i = 0; i < arguments.length; i = i + len) {
+			var entry = {text:arguments[i + textOffset], flag:arguments[i + flagOffset], bDontHide:true, savedItemIndex:0, filterFlag:1, priority:arguments[i + priorityOffset]};
+
+			if (entry.flag == 0) {
+				entry.divider = true;
+			}
+
+			entry.enabled = true;
+
+			CategoriesList.entryList.push(entry);
+		}
+
+		CategoriesList.entryList.sort(categoryCompare);
+
 		CategoriesList.InvalidateData();
 	}
 
@@ -496,34 +595,12 @@ class CraftingLists extends MovieClip
 
 		// ConstructibleObject - Use a custom categorization scheme.
 		} else if (_subtypeName == "ConstructibleObject") {
-			CategoriesList.iconArt = [ "construct_all", "weapon", "ammo", "armor", "jewelry", "food", "misc" ];
-
-			replaceConstructObjectCategories();
+			// Set by different function
 
 		// Alchemy - Use a custom categorization scheme.
 		} else if (_subtypeName == "Alchemy") {
 			fixupAlchemyCategories();
 		}
-	}
-
-	private function replaceConstructObjectCategories(): Void
-	{
-		CategoriesList.clearList();
-
-		CategoriesList.entryList.push(
-			{text: "$ALL", flag: Inventory.FILTERFLAG_CUST_CRAFT_ALL, bDontHide: 1, savedItemIndex: 0, filterFlag: 1, enabled: false});
-		CategoriesList.entryList.push(
-			{text: "$WEAPONS", flag: Inventory.FILTERFLAG_CUST_CRAFT_WEAPONS, bDontHide: 1, savedItemIndex: 0, filterFlag: 1, enabled: false});
-		CategoriesList.entryList.push(
-			{text: "$AMMO", flag: Inventory.FILTERFLAG_CUST_CRAFT_AMMO, bDontHide: 1, savedItemIndex: 0, filterFlag: 1, enabled: false});
-		CategoriesList.entryList.push(
-			{text: Translator.translate("$Armor"), flag: Inventory.FILTERFLAG_CUST_CRAFT_ARMOR, bDontHide: 1, savedItemIndex: 0, filterFlag: 1, enabled: false});
-		CategoriesList.entryList.push(
-			{text: Translator.translate("$Jewelry"), flag: Inventory.FILTERFLAG_CUST_CRAFT_JEWELRY, bDontHide: 1, savedItemIndex: 0, filterFlag: 1, enabled: false});
-		CategoriesList.entryList.push(
-			{text: Translator.translate("$Food"), flag: Inventory.FILTERFLAG_CUST_CRAFT_FOOD, bDontHide: 1, savedItemIndex: 0, filterFlag: 1, enabled: false});
-		CategoriesList.entryList.push(
-			{text: Translator.translate("$Misc"), flag: Inventory.FILTERFLAG_CUST_CRAFT_MISC, bDontHide: 1, savedItemIndex: 0, filterFlag: 1, enabled: false});
 	}
 
 	private function fixupAlchemyCategories(): Void

@@ -13,6 +13,8 @@ namespace Hooks
 
 		static void LoadMoviePatch();
 
+		static void CustomCategoryPatch();
+
 	private:
 		static bool CheckFurniture(RE::TESObjectREFR* a_refr);
 
@@ -24,9 +26,14 @@ namespace Hooks
 			RE::GFxMovieView::ScaleModeType a_mode,
 			float a_backgroundAlpha);
 
+		static void SetItemEntryData(
+			RE::CraftingSubMenus::ConstructibleObjectMenu* a_menu,
+			RE::BSTArray<RE::CraftingSubMenus::ConstructibleObjectMenu::ItemEntry>& a_entries);
+
 		inline static WorkBenchType _currentWorkBenchType = WorkBenchType::kNone;
 
 		inline static REL::Relocation<decltype(&CheckFurniture)> _IsFurniture;
 		inline static REL::Relocation<decltype(&LoadMovie)> _LoadMovie;
+		inline static REL::Relocation<decltype(&SetItemEntryData)> _SetItemEntryData;
 	};
 }
