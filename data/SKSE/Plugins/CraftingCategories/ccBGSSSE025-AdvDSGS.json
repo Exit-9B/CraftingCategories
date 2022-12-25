@@ -1,0 +1,21 @@
+{
+  "categories": {
+    "$Daedric": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [
+        "ccBGSSSE025_ArmorMaterialDark",
+        "ccBGSSSE025_ArmorMaterialGolden",
+        "ccBGSSSE025_WeapMaterialDark",
+        "ccBGSSSE025_WeapMaterialGolden"
+      ]
+    },
+    "$Madness": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [ "ccBGSSSE025_ArmorMaterialMadness", "ccBGSSSE025_WeapMaterialMadness" ]
+    },
+    "$Amber": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [ "ccBGSSSE025_ArmorMaterialAmber", "ccBGSSSE025_WeapMaterialAmber" ]
+    }
+  }
+}

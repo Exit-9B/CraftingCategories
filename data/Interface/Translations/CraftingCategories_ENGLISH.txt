@@ -3,7 +3,10 @@ $FOOD	FOOD
 $JEWELRY	JEWELRY
 $MISC	MISC
 $WEAPONS & ARMOR	WEAPONS & ARMOR
+$Amber	Amber
 $Ancient Nord	Ancient Nord
 $BuildingMaterials	Building Materials
 $Dragon	Dragon
 $Ingots	Ingots
+$Madness	Madness
+$Ordinator	Ordinator
