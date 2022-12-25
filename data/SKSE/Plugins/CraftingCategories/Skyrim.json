@@ -38,19 +38,15 @@
     },
     "$Hide": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialHide", "ArmorMaterialScaled"]
+      "keywords": ["ArmorMaterialHide", "ArmorMaterialStudded"]
     },
-    "$Ancient Nord": {
+    "$Scaled": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["WeapMaterialDraugr", "WeapMaterialDraugrHoned"]
+      "keywords": ["ArmorMaterialScaled"]
     },
     "$Iron": {
       "section": "$WEAPONS & ARMOR",
       "keywords": ["ArmorMaterialIron", "ArmorMaterialIronBanded", "WeapMaterialIron"]
-    },
-    "$Studded": {
-      "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialStudded"]
     },
     "$Imperial": {
       "section": "$WEAPONS & ARMOR",
@@ -108,7 +104,12 @@
     },
     "$Daedric": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialDaedric", "WeapMaterialDaedric"]
+      "keywords": [
+        "ArmorMaterialDaedric",
+        "WeapMaterialDaedric",
+        "WeapMaterialDraugr",
+        "WeapMaterialDraugrHoned"
+      ]
     },
     "$Bonemold": {
       "section": "$WEAPONS & ARMOR",
