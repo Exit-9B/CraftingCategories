@@ -42,6 +42,8 @@ extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []()
 	v.AuthorName("Parapets"sv);
 
 	v.UsesAddressLibrary(true);
+	v.HasNoStructUse(true);
+	v.UsesStructsPost629(false);
 
 	return v;
 }();
