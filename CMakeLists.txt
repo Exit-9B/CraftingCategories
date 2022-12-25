@@ -37,6 +37,32 @@ target_link_libraries(
 		jsoncpp_static
 )
 
+file(GLOB TRANSLATIONS
+	LIST_DIRECTORIES false
+	CONFIGURE_DEPENDS
+	"${PROJECT_SOURCE_DIR}/data/Interface/Translations/CraftingCategories_*.txt"
+)
+
+file(GLOB CONFIGS
+	LIST_DIRECTORIES false
+	CONFIGURE_DEPENDS
+	"${PROJECT_SOURCE_DIR}/data/SKSE/Plugins/CraftingCategories/*.json"
+)
+
+target_sources(
+	${PROJECT_NAME}
+	PRIVATE
+		${TRANSLATIONS}
+		${CONFIGS}
+)
+
+source_group(
+	"Data Files"
+	FILES
+		${TRANSLATIONS}
+		${CONFIGS}
+)
+
 install(
 	FILES
 		"${PROJECT_SOURCE_DIR}/data/Interface/constructibleobjectmenu.swf"
@@ -46,14 +72,14 @@ install(
 
 install(
 	FILES
-		"${PROJECT_SOURCE_DIR}/data/Interface/Translations/CraftingCategories_ENGLISH.txt"
+		${TRANSLATIONS}
 	DESTINATION
 		"Interface/Translations"
 )
 
 install(
 	FILES
-		"${PROJECT_SOURCE_DIR}/data/SKSE/Plugins/CraftingCategories/Skyrim.json"
+		${CONFIGS}
 	DESTINATION
 		"SKSE/Plugins/CraftingCategories"
 )
