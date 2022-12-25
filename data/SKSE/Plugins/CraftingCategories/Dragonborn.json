@@ -1,0 +1,28 @@
+{
+  "categories": {
+    "$Bonemold": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [ "DLC2ArmorMaterialBonemoldHeavy", "DLC2ArmorMaterialBonemoldLight" ]
+    },
+    "$Chitin": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [ "DLC2ArmorMaterialChitinHeavy", "DLC2ArmorMaterialChitinLight" ]
+    },
+    "$Nordic": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [
+        "DLC2ArmorMaterialNordicHeavy",
+        "DLC2ArmorMaterialNordicLight",
+        "DLC2WeaponMaterialNordic"
+      ]
+    },
+    "$Stalhrim": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [
+        "DLC2ArmorMaterialStalhrimHeavy",
+        "DLC2ArmorMaterialStalhrimLight",
+        "DLC2WeaponMaterialStalhrim"
+      ]
+    }
+  }
+}

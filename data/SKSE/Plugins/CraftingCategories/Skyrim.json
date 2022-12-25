@@ -20,33 +20,33 @@
     },
     "$CLOTHING": {
       "priority": 20,
-      "keywords": ["ArmorClothing"]
+      "keywords": [ "ArmorClothing" ]
     },
     "$JEWELRY": {
       "priority": 30,
-      "keywords": ["ArmorJewelry"]
+      "keywords": [ "ArmorJewelry" ]
     },
     "$FOOD": {
       "priority": 40,
-      "keywords": ["VendorItemFood"]
+      "keywords": [ "VendorItemFood" ]
     }
   },
   "categories": {
     "$Wood": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["WeapMaterialWood"]
+      "keywords": [ "WeapMaterialWood" ]
     },
     "$Hide": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialHide", "ArmorMaterialStudded"]
+      "keywords": [ "ArmorMaterialHide", "ArmorMaterialStudded" ]
     },
     "$Scaled": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialScaled"]
+      "keywords": [ "ArmorMaterialScaled" ]
     },
     "$Iron": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialIron", "ArmorMaterialIronBanded", "WeapMaterialIron"]
+      "keywords": [ "ArmorMaterialIron", "ArmorMaterialIronBanded", "WeapMaterialIron" ]
     },
     "$Imperial": {
       "section": "$WEAPONS & ARMOR",
@@ -59,47 +59,45 @@
     },
     "$Steel": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialSteel", "ArmorMaterialSteelPlate", "WeapMaterialSteel"]
+      "keywords": [ "ArmorMaterialSteel", "ArmorMaterialSteelPlate", "WeapMaterialSteel" ]
     },
     "$Leather": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialLeather"]
+      "keywords": [ "ArmorMaterialLeather" ]
     },
     "$Dwarven": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialDwarven", "WeapMaterialDwarven"]
+      "keywords": [ "ArmorMaterialDwarven", "WeapMaterialDwarven" ]
     },
     "$Elven": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialElven", "ArmorMaterialElvenGilded", "WeapMaterialElven"]
+      "keywords": [ "ArmorMaterialElven", "ArmorMaterialElvenGilded", "WeapMaterialElven" ]
     },
     "$Falmer": {
       "section": "$WEAPONS & ARMOR",
       "keywords": [
         "ArmorMaterialFalmer",
-        "DLC1ArmorMaterielFalmerHeavy",
-        "DLC1ArmorMaterielFalmerHeavyOriginal",
         "WeapMaterialFalmer",
-        "WeapMaterialFalmerHoned"]
+        "WeapMaterialFalmerHoned"
+      ]
     },
     "$Orcish": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialOrcish", "WeapMaterialOrcish"]
+      "keywords": [ "ArmorMaterialOrcish", "WeapMaterialOrcish" ]
     },
     "$Ebony": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialEbony", "WeapMaterialEbony"]
+      "keywords": [ "ArmorMaterialEbony", "WeapMaterialEbony" ]
     },
     "$Glass": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": ["ArmorMaterialGlass", "WeapMaterialGlass"]
+      "keywords": [ "ArmorMaterialGlass", "WeapMaterialGlass" ]
     },
     "$Dragon": {
       "section": "$WEAPONS & ARMOR",
       "keywords": [
         "ArmorMaterialDragonplate",
-        "ArmorMaterialDragonscale",
-        "DLC1WeapMaterialDragonbone"
+        "ArmorMaterialDragonscale"
       ]
     },
     "$Daedric": {
@@ -111,57 +109,8 @@
         "WeapMaterialDraugrHoned"
       ]
     },
-    "$Bonemold": {
-      "section": "$WEAPONS & ARMOR",
-      "keywords": ["DLC2ArmorMaterialBonemoldHeavy", "DLC2ArmorMaterialBonemoldLight"]
-    },
-    "$Chitin": {
-      "section": "$WEAPONS & ARMOR",
-      "keywords": ["DLC2ArmorMaterialChitinHeavy", "DLC2ArmorMaterialChitinLight"]
-    },
-    "$Nordic": {
-      "section": "$WEAPONS & ARMOR",
-      "keywords": [
-        "DLC2ArmorMaterialNordicHeavy",
-        "DLC2ArmorMaterialNordicLight",
-        "DLC2WeaponMaterialNordic"
-      ]
-    },
-    "$Stalhrim": {
-      "section": "$WEAPONS & ARMOR",
-      "keywords": [
-        "DLC2ArmorMaterialStalhrimHeavy",
-        "DLC2ArmorMaterialStalhrimLight",
-        "DLC2WeaponMaterialStalhrim"
-      ]
-    },
-    "$Aetherium": {
-      "section": "$WEAPONS & ARMOR",
-      "keywords": ["DLC1LD_CraftingMaterialAetherium"]
-    },
-    "$House": {
-      "keywords": ["BYOHHouseCraftingCategoryBuilding"]
-    },
-    "$Containers": {
-      "keywords": ["BYOHHouseCraftingCategoryContainers"]
-    },
-    "$Furniture": {
-      "keywords": ["BYOHHouseCraftingCategoryFurniture"]
-    },
-    "$WeaponRacks": {
-      "keywords": ["BYOHHouseCraftingCategoryWeaponRacks"]
-    },
-    "$Shelves": {
-      "keywords": ["BYOHHouseCraftingCategoryShelf"]
-    },
-    "$Exterior": {
-      "keywords": ["BYOHHouseCraftingCategoryExterior"]
-    },
-    "$BuildingMaterials": {
-      "keywords": ["BYOHHouseCraftingCategorySmithing"]
-    },
     "$Ingots": {
-      "keywords": ["VendorItemOreIngot"]
+      "keywords": [ "VendorItemOreIngot" ]
     }
   }
 }

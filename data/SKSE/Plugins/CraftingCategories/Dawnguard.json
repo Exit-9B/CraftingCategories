@@ -1,0 +1,21 @@
+{
+  "categories": {
+    "$Falmer": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [
+        "DLC1ArmorMaterielFalmerHeavy",
+        "DLC1ArmorMaterielFalmerHeavyOriginal"
+      ]
+    },
+    "$Dragon": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [
+        "DLC1WeapMaterialDragonbone"
+      ]
+    },
+    "$Aetherium": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [ "DLC1LD_CraftingMaterialAetherium" ]
+    }
+  }
+}

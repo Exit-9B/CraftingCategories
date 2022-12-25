@@ -1,0 +1,25 @@
+{
+  "categories": {
+    "$House": {
+      "keywords": [ "BYOHHouseCraftingCategoryBuilding" ]
+    },
+    "$Containers": {
+      "keywords": [ "BYOHHouseCraftingCategoryContainers" ]
+    },
+    "$Furniture": {
+      "keywords": [ "BYOHHouseCraftingCategoryFurniture" ]
+    },
+    "$WeaponRacks": {
+      "keywords": [ "BYOHHouseCraftingCategoryWeaponRacks" ]
+    },
+    "$Shelves": {
+      "keywords": [ "BYOHHouseCraftingCategoryShelf" ]
+    },
+    "$Exterior": {
+      "keywords": [ "BYOHHouseCraftingCategoryExterior" ]
+    },
+    "$BuildingMaterials": {
+      "keywords": [ "BYOHHouseCraftingCategorySmithing" ]
+    }
+  }
+}
