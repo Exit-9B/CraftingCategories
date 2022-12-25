@@ -294,26 +294,37 @@ class CraftingLists extends MovieClip
 		var flag2 = a_cat2.flag;
 
 		if ((flag1 & 0xFF000000) == (flag2 & 0xFF000000)) {
-			if ((flag1 & 0x00FFFFFF) && (flag2 & 0x00FFFFFF)) {
+			var category1 = (flag1 & 0x00FFFFFF);
+			var category2 = (flag2 & 0x00FFFFFF);
+
+			if (category1 && category2) {
 				var text1 = Translator.translate(a_cat1.text);
 				var text2 = Translator.translate(a_cat2.text);
 
-				if (text1 < text2 || ((flag2 & 0x00FFFFFF) == 0x1)) {
+				if (category1 != 0x1 && category2 == 0x1) {
 					return -1;
 				}
 
-				if (text1 > text2 || ((flag1 & 0x00FFFFFF) == 0x1)) {
+				if (category2 != 0x1 && category1 == 0x1) {
+					return 1;
+				}
+
+				if (text1 < text2) {
+					return -1;
+				}
+
+				if (text1 > text2) {
 					return 1;
 				}
 
 				return 0;
 			}
 
-			if ((flag2 & 0x00FFFFFF)) {
+			if (category2) {
 				return -1;
 			}
 
-			if ((flag1 & 0x00FFFFFF)) {
+			if (category1) {
 				return 1;
 			}
 		}
