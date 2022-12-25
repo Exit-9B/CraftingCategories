@@ -5,6 +5,7 @@
   "dependencies": [
     "boost-stl-interfaces",
     "rsm-binary-io",
-    "spdlog"
+    "spdlog",
+    "jsoncpp"
   ]
 }

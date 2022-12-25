@@ -1,3 +1,4 @@
+#include "Data/ConfigLoader.h"
 #include "Hooks/Crafting.h"
 
 namespace
@@ -31,8 +32,8 @@ namespace
 	}
 }
 
-extern "C" DLLEXPORT constinit auto SKSEPlugin_Version =
-[]() {
+extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []()
+{
 	SKSE::PluginVersionData v{};
 
 	v.PluginVersion(Plugin::VERSION);
@@ -53,6 +54,16 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 	SKSE::AllocTrampoline(42);
 
 	Hooks::Crafting::Install();
+
+	SKSE::GetMessagingInterface()->RegisterListener(
+		[](auto msg)
+		{
+			switch (msg->type) {
+			case SKSE::MessagingInterface::kDataLoaded:
+				Data::ConfigLoader::GetSingleton()->LoadConfigs();
+				break;
+			}
+		});
 
 	return true;
 }

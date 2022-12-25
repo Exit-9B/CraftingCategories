@@ -29,11 +29,26 @@ SKSEPlugin_Add(
 		src/PCH/PCH.h
 )
 
+find_package(jsoncpp CONFIG REQUIRED)
+
+target_link_libraries(
+	${PROJECT_NAME}
+	PRIVATE
+		jsoncpp_static
+)
+
 install(
 	FILES
 		"${PROJECT_SOURCE_DIR}/data/Interface/constructibleobjectmenu.swf"
 	DESTINATION
 		"Interface"
+)
+
+install(
+	FILES
+		"${PROJECT_SOURCE_DIR}/data/SKSE/Plugins/CraftingCategories/Skyrim.json"
+	DESTINATION
+		"SKSE/Plugins/CraftingCategories"
 )
 
 set(CPACK_GENERATOR "7Z")
