@@ -4,6 +4,11 @@ namespace RE
 {
 	namespace Offset
 	{
+		namespace BSScaleformTranslator
+		{
+			inline static constexpr REL::ID GetCachedString{ 69188 };
+		}
+
 		namespace CraftingMenu
 		{
 			inline static constexpr REL::ID Ctor{ 51361 };

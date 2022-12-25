@@ -1,5 +1,6 @@
 #include "Data/ConfigLoader.h"
 #include "Hooks/Crafting.h"
+#include "Translation/Translation.h"
 
 namespace
 {
@@ -60,6 +61,7 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 		{
 			switch (msg->type) {
 			case SKSE::MessagingInterface::kDataLoaded:
+				Translation::ParseTranslation(Plugin::NAME.data());
 				Data::ConfigLoader::GetSingleton()->LoadConfigs();
 				break;
 			}

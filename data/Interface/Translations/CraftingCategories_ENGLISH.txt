@@ -1,0 +1,9 @@
+$CLOTHING	CLOTHING
+$FOOD	FOOD
+$JEWELRY	JEWELRY
+$MISC	MISC
+$WEAPONS & ARMOR	WEAPONS & ARMOR
+$Ancient Nord	Ancient Nord
+$BuildingMaterials	Building Materials
+$Dragon	Dragon
+$Ingots	Ingots

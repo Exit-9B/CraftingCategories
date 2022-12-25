@@ -46,6 +46,13 @@ install(
 
 install(
 	FILES
+		"${PROJECT_SOURCE_DIR}/data/Interface/Translations/CraftingCategories_ENGLISH.txt"
+	DESTINATION
+		"Interface/Translations"
+)
+
+install(
+	FILES
 		"${PROJECT_SOURCE_DIR}/data/SKSE/Plugins/CraftingCategories/Skyrim.json"
 	DESTINATION
 		"SKSE/Plugins/CraftingCategories"
