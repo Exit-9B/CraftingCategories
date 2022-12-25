@@ -80,7 +80,7 @@ namespace Data
 
 				std::int32_t priority = 50;
 				if (section.isMember("priority")) {
-					priority = section["priority"].asInt();
+					priority = std::min(std::max(section["priority"].asInt(), 0), 100);
 				}
 
 				auto keywords = GetKeywords(section["keywords"]);
