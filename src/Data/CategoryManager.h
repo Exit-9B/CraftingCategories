@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tsl/ordered_map.h>
+
 namespace Data
 {
 	class CategoryManager final
@@ -19,7 +21,7 @@ namespace Data
 			std::int32_t Priority = 50;
 			std::set<Keyword> Keywords;
 
-			std::map<std::string, Category> Categories;
+			tsl::ordered_map<std::string, Category> Categories;
 			std::map<Keyword, Category*> CategoryKeywords;
 		};
 
@@ -70,13 +72,13 @@ namespace Data
 			std::int32_t Priority;
 		};
 
-		std::map<std::string, Section> _sections;
+		tsl::ordered_map<std::string, Section> _sections;
 		std::map<Keyword, Section*> _sectionKeywords;
 
 		std::uint32_t _nextSectionFlag = StartIndex;
 		std::uint32_t _nextCategoryFlag = StartIndex;
-		std::map<Section*, std::uint32_t> _sectionFlags;
-		std::map<Category*, std::uint32_t> _categoryFlags;
+		std::map<const Section*, std::uint32_t> _sectionFlags;
+		std::map<const Category*, std::uint32_t> _categoryFlags;
 		std::map<std::uint32_t, CategoryData> _currentFilters;
 	};
 }

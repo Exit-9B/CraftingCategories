@@ -58,8 +58,8 @@ namespace Data
 	{
 		const auto keywordForm = skyrim_cast<RE::BGSKeywordForm*>(a_form);
 
-		Section* assignedSection = &_sections[""];
-		Category* assignedCategory = nullptr;
+		const Section* assignedSection = &_sections[""];
+		const Category* assignedCategory = nullptr;
 		std::uint32_t sectionFlag = MiscSectionFlag;
 		std::uint32_t categoryFlag = OtherCategoryFlag;
 
@@ -71,7 +71,9 @@ namespace Data
 				return keywordForm->HasKeyword(keyword);
 			};
 
-			for (auto& [label, section] : _sections) {
+			for (auto s = _sections.rbegin(); s != _sections.rend(); ++s) {
+				auto& [label, section] = *s;
+
 				if (std::ranges::any_of(section.Keywords, hasKeyword)) {
 					assignedSection = &section;
 					if (auto i = _sectionFlags.find(&section); i != _sectionFlags.end()) {
@@ -81,10 +83,16 @@ namespace Data
 						sectionFlag = _nextSectionFlag++ << CategoryBits;
 						_sectionFlags[&section] = sectionFlag;
 					}
+
+					break;
 				}
 			}
 
-			for (auto& [label, category] : assignedSection->Categories) {
+			for (auto c = assignedSection->Categories.rbegin();
+				 c != assignedSection->Categories.rend();
+				 ++c) {
+				auto& [label, category] = *c;
+
 				if (std::ranges::any_of(category.Keywords, hasKeyword)) {
 					assignedCategory = &category;
 					if (auto i = _categoryFlags.find(&category); i != _categoryFlags.end()) {
@@ -94,6 +102,8 @@ namespace Data
 						categoryFlag = _nextCategoryFlag;
 						_categoryFlags[&category] = _nextCategoryFlag++;
 					}
+
+					break;
 				}
 			}
 		}

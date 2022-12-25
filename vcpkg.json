@@ -6,6 +6,7 @@
     "boost-stl-interfaces",
     "rsm-binary-io",
     "spdlog",
-    "jsoncpp"
+    "jsoncpp",
+    "tsl-ordered-map"
   ]
 }

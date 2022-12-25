@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 
 project(
 	CraftingCategories
-	VERSION 0.4.0
+	VERSION 0.5.1
 	LANGUAGES CXX
 )
 
@@ -30,11 +30,13 @@ SKSEPlugin_Add(
 )
 
 find_package(jsoncpp CONFIG REQUIRED)
+find_package(tsl-ordered-map CONFIG REQUIRED)
 
 target_link_libraries(
 	${PROJECT_NAME}
 	PRIVATE
 		jsoncpp_static
+		tsl::ordered_map
 )
 
 file(GLOB TRANSLATIONS
