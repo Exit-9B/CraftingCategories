@@ -59,9 +59,14 @@ target_sources(
 )
 
 source_group(
-	"Data Files"
+	"Data Files/Translations"
 	FILES
 		${TRANSLATIONS}
+)
+
+source_group(
+	"Data Files/Configs"
+	FILES
 		${CONFIGS}
 )
 
