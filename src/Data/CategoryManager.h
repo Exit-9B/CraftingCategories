@@ -21,7 +21,7 @@ namespace Data
 			std::int32_t Priority = 50;
 			std::set<Keyword> Keywords;
 			std::string IconSource = "craftingcategories/icons.swf";
-			std::string IconLabel = "section_default";
+			std::string IconLabel = "default";
 
 			tsl::ordered_map<std::string, Category> Categories;
 			std::map<Keyword, Category*> CategoryKeywords;
@@ -77,6 +77,9 @@ namespace Data
 			const char* IconSource;
 			const char* IconLabel;
 		};
+
+		std::string _iconSourceAll;
+		std::string _iconLabelAll;
 
 		tsl::ordered_map<std::string, Section> _sections;
 		std::map<Keyword, Section*> _sectionKeywords;

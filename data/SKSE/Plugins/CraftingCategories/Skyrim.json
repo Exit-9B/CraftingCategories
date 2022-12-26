@@ -1,6 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/Exit-9B/CraftingCategories/main/docs/CraftingCategories.schema.json",
   "sections": {
+    "$ALL": {
+      "icon": {
+        "source": "craftingcategories/icons.swf",
+        "label": "all"
+      }
+    },
+    "$MISC": {
+      "icon": {
+        "source": "skyui/icons_item_psychosteve.swf",
+        "label": "misc_ingot"
+      }
+    },
     "$WEAPONS & ARMOR": {
       "priority": 10,
       "keywords": [
@@ -19,32 +31,32 @@
         "WeapTypeWarhammer"
       ],
       "icon": {
-        "source": "craftingcategories/icons.swf",
-        "label": "weapons_armor"
+        "source": "skyui/icons_item_psychosteve.swf",
+        "label": "armor_head"
       }
     },
     "$CLOTHING": {
       "priority": 20,
       "keywords": [ "ArmorClothing" ],
       "icon": {
-        "source": "craftingcategories/icons.swf",
-        "label": "clothing"
+        "source": "skyui/icons_item_psychosteve.swf",
+        "label": "clothing_body"
       }
     },
     "$JEWELRY": {
       "priority": 30,
       "keywords": [ "ArmorJewelry" ],
       "icon": {
-        "source": "craftingcategories/icons.swf",
-        "label": "jewelry"
+        "source": "skyui/icons_item_psychosteve.swf",
+        "label": "armor_ring"
       }
     },
     "$FOOD": {
       "priority": 40,
       "keywords": [ "VendorItemFood" ],
       "icon": {
-        "source": "craftingcategories/icons.swf",
-        "label": "food"
+        "source": "skyui/icons_item_psychosteve.swf",
+        "label": "default_food"
       }
     }
   },

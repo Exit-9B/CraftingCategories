@@ -7,8 +7,6 @@ namespace Data
 		auto& miscSection = _sections[""];
 		miscSection.Label = MiscLabel;
 		miscSection.Priority = 200;
-		miscSection.IconSource = "craftingcategories/icons.swf";
-		miscSection.IconLabel = "misc";
 	}
 
 	CategoryManager* CategoryManager::GetSingleton()
@@ -24,6 +22,29 @@ namespace Data
 		const std::string& a_iconSource,
 		const std::string& a_iconLabel)
 	{
+		if (a_label == AllLabel) {
+			if (!a_iconSource.empty()) {
+				_iconSourceAll = a_iconSource;
+			}
+
+			if (!a_iconLabel.empty()) {
+				_iconLabelAll = a_iconLabel;
+			}
+
+			return;
+		}
+		else if (a_label == MiscLabel) {
+			if (!a_iconSource.empty()) {
+				_sections[""].IconSource = a_iconSource;
+			}
+
+			if (!a_iconLabel.empty()) {
+				_sections[""].IconLabel = a_iconLabel;
+			}
+
+			return;
+		}
+
 		auto& section = _sections[a_label];
 		section.Label = a_label;
 
@@ -152,13 +173,13 @@ namespace Data
 		const std::uint32_t numArgs = numCategories * stride;
 		a_result.resize(numArgs);
 
-		a_result[0] = AllLabel;
-		a_result[1] = AllFlag;
-		a_result[2] = -1;
-		a_result[3] = "craftingcategories/icons.swf";
-		a_result[4] = "all";
+		std::uint32_t i = 0;
+		a_result[i++] = AllLabel;
+		a_result[i++] = AllFlag;
+		a_result[i++] = -1;
+		a_result[i++] = _iconSourceAll;
+		a_result[i++] = _iconLabelAll;
 
-		std::uint32_t i = stride;
 		for (auto& [flag, data] : _currentFilters) {
 			a_result[i++] = data.Label;
 			a_result[i++] = flag;

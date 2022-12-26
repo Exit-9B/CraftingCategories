@@ -61,8 +61,7 @@
           "properties": {
             "source": {
               "description": "Path to a SWF movie in the Interface directory containing icons",
-              "type": "string",
-              "default": "craftingcategories/icons.swf"
+              "type": "string"
             },
             "label": {
               "description": "Frame label in the timeline to display",

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 
 project(
 	CraftingCategories
-	VERSION 0.6.1
+	VERSION 0.7.0
 	LANGUAGES CXX
 )
 
@@ -82,6 +82,13 @@ install(
 		${TRANSLATIONS}
 	DESTINATION
 		"Interface/Translations"
+)
+
+install(
+	FILES
+		"${PROJECT_SOURCE_DIR}/data/Interface/craftingcategories/icons.swf"
+	DESTINATION
+		"Interface/craftingcategories"
 )
 
 install(

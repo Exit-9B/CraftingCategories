@@ -48,6 +48,13 @@ class skyui.components.list.ButtonListEntry extends BasicListEntry
 		if (textField != undefined) {
 			textField.autoSize = a_entryObject.align ? a_entryObject.align : "left";
 
+			if (a_entryObject.flag == undefined || (a_entryObject.flag != 0xFFFFFFFF && (a_entryObject.flag & 0x00FFFFFF))) {
+				textField._x = 35;
+			}
+			else {
+				textField._x = 30;
+			}
+
 			if (!a_entryObject.enabled)
 				textField.textColor = disabledTextColor;
 			else if (isActive)
@@ -90,5 +97,7 @@ class skyui.components.list.ButtonListEntry extends BasicListEntry
 	private function onLoadInit(a_icon: MovieClip): Void
 	{
 		a_icon.gotoAndStop(_iconLabel);
+		a_icon._height = 20;
+		a_icon._width = 20;
 	}
 }
