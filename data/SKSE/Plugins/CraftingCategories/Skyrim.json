@@ -54,11 +54,7 @@
     },
     "$Hide": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": [ "ArmorMaterialHide", "ArmorMaterialStudded" ]
-    },
-    "$Scaled": {
-      "section": "$WEAPONS & ARMOR",
-      "keywords": [ "ArmorMaterialScaled" ]
+      "keywords": [ "ArmorMaterialHide", "ArmorMaterialScaled", "ArmorMaterialStudded" ]
     },
     "$Iron": {
       "section": "$WEAPONS & ARMOR",
@@ -91,11 +87,7 @@
     },
     "$Falmer": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": [
-        "ArmorMaterialFalmer",
-        "WeapMaterialFalmer",
-        "WeapMaterialFalmerHoned"
-      ]
+      "keywords": [ "ArmorMaterialFalmer", "WeapMaterialFalmer", "WeapMaterialFalmerHoned" ]
     },
     "$Orcish": {
       "section": "$WEAPONS & ARMOR",
@@ -111,10 +103,7 @@
     },
     "$Dragon": {
       "section": "$WEAPONS & ARMOR",
-      "keywords": [
-        "ArmorMaterialDragonplate",
-        "ArmorMaterialDragonscale"
-      ]
+      "keywords": [ "ArmorMaterialDragonplate", "ArmorMaterialDragonscale" ]
     },
     "$Daedric": {
       "section": "$WEAPONS & ARMOR",
@@ -124,9 +113,6 @@
         "WeapMaterialDraugr",
         "WeapMaterialDraugrHoned"
       ]
-    },
-    "$Ingots": {
-      "keywords": [ "VendorItemOreIngot" ]
     }
   }
 }
