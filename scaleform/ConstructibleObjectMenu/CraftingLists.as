@@ -524,12 +524,23 @@ class CraftingLists extends MovieClip
 		var textOffset = 0;
 		var flagOffset = 1;
 		var priorityOffset = 2;
-		var len = 3;
+		var iconSourceOffset = 3;
+		var iconLabelOffset = 4;
+		var len = 5;
 
 		CategoriesList.clearList();
 
 		for (var i = 0; i < arguments.length; i = i + len) {
-			var entry = {text:arguments[i + textOffset], flag:arguments[i + flagOffset], bDontHide:true, savedItemIndex:0, filterFlag:1, priority:arguments[i + priorityOffset]};
+			var entry = {
+				text:arguments[i + textOffset],
+				flag:arguments[i + flagOffset],
+				bDontHide:true,
+				savedItemIndex:0,
+				filterFlag:1,
+				priority:arguments[i + priorityOffset],
+				iconSource:arguments[i + iconSourceOffset],
+				iconLabel:arguments[i + iconLabelOffset]
+			};
 
 			if (entry.flag == 0) {
 				entry.divider = true;

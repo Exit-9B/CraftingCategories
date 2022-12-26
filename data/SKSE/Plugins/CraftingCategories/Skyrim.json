@@ -16,19 +16,35 @@
         "WeapTypeSword",
         "WeapTypeWarAxe",
         "WeapTypeWarhammer"
-      ]
+      ],
+      "icon": {
+        "source": "craftingcategories/icons.swf",
+        "label": "weapons_armor"
+      }
     },
     "$CLOTHING": {
       "priority": 20,
-      "keywords": [ "ArmorClothing" ]
+      "keywords": [ "ArmorClothing" ],
+      "icon": {
+        "source": "craftingcategories/icons.swf",
+        "label": "clothing"
+      }
     },
     "$JEWELRY": {
       "priority": 30,
-      "keywords": [ "ArmorJewelry" ]
+      "keywords": [ "ArmorJewelry" ],
+      "icon": {
+        "source": "craftingcategories/icons.swf",
+        "label": "jewelry"
+      }
     },
     "$FOOD": {
       "priority": 40,
-      "keywords": [ "VendorItemFood" ]
+      "keywords": [ "VendorItemFood" ],
+      "icon": {
+        "source": "craftingcategories/icons.swf",
+        "label": "food"
+      }
     }
   },
   "categories": {

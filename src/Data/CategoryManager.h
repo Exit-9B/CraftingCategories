@@ -20,6 +20,8 @@ namespace Data
 			std::string Label;
 			std::int32_t Priority = 50;
 			std::set<Keyword> Keywords;
+			std::string IconSource = "craftingcategories/icons.swf";
+			std::string IconLabel = "section_default";
 
 			tsl::ordered_map<std::string, Category> Categories;
 			std::map<Keyword, Category*> CategoryKeywords;
@@ -36,7 +38,9 @@ namespace Data
 		void AddSection(
 			const std::string& a_label,
 			std::int32_t a_priority,
-			std::set<Keyword>&& a_keywords);
+			std::set<Keyword>&& a_keywords,
+			const std::string& a_iconSource,
+			const std::string& a_iconLabel);
 
 		void AddCategory(
 			const std::string& a_label,
@@ -70,6 +74,8 @@ namespace Data
 		{
 			const char* Label;
 			std::int32_t Priority;
+			const char* IconSource;
+			const char* IconLabel;
 		};
 
 		tsl::ordered_map<std::string, Section> _sections;

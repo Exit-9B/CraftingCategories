@@ -7,6 +7,8 @@ namespace Data
 		auto& miscSection = _sections[""];
 		miscSection.Label = MiscLabel;
 		miscSection.Priority = 200;
+		miscSection.IconSource = "craftingcategories/icons.swf";
+		miscSection.IconLabel = "misc";
 	}
 
 	CategoryManager* CategoryManager::GetSingleton()
@@ -18,12 +20,26 @@ namespace Data
 	void CategoryManager::AddSection(
 		const std::string& a_label,
 		std::int32_t a_priority,
-		std::set<Keyword>&& a_keywords)
+		std::set<Keyword>&& a_keywords,
+		const std::string& a_iconSource,
+		const std::string& a_iconLabel)
 	{
 		auto& section = _sections[a_label];
 		section.Label = a_label;
-		section.Priority = a_priority;
+
+		if (a_priority >= 0) {
+			section.Priority = a_priority;
+		}
+
 		section.Keywords.merge(a_keywords);
+
+		if (!a_iconSource.empty()) {
+			section.IconSource = a_iconSource;
+		}
+
+		if (!a_iconLabel.empty()) {
+			section.IconLabel = a_iconLabel;
+		}
 
 		for (auto& keyword : a_keywords) {
 			if (auto i = _sectionKeywords.find(keyword); i != _sectionKeywords.end()) {
@@ -108,14 +124,16 @@ namespace Data
 			}
 		}
 
-		_currentFilters[sectionFlag] = {
-			assignedSection->Label.data(),
-			assignedSection->Priority
+		_currentFilters[sectionFlag] = CategoryData{
+			.Label = assignedSection->Label.data(),
+			.Priority = assignedSection->Priority,
+			.IconSource = assignedSection->IconSource.data(),
+			.IconLabel = assignedSection->IconLabel.data(),
 		};
 
-		_currentFilters[sectionFlag | categoryFlag] = {
-			assignedCategory ? assignedCategory->Label.data() : OtherLabel,
-			assignedSection->Priority
+		_currentFilters[sectionFlag | categoryFlag] = CategoryData{
+			.Label = assignedCategory ? assignedCategory->Label.data() : OtherLabel,
+			.Priority = assignedSection->Priority,
 		};
 
 		RE::GFxValue priority = assignedSection->Priority;
@@ -128,21 +146,25 @@ namespace Data
 	{
 		RemoveRedundantFilters();
 
-		constexpr std::uint32_t rowLen = 3;
+		constexpr std::uint32_t stride = 5;
 
 		const std::uint32_t numCategories = 1 + static_cast<std::uint32_t>(_currentFilters.size());
-		const std::uint32_t numArgs = numCategories * rowLen;
+		const std::uint32_t numArgs = numCategories * stride;
 		a_result.resize(numArgs);
 
 		a_result[0] = AllLabel;
 		a_result[1] = AllFlag;
 		a_result[2] = -1;
+		a_result[3] = "craftingcategories/icons.swf";
+		a_result[4] = "all";
 
-		std::uint32_t i = rowLen;
+		std::uint32_t i = stride;
 		for (auto& [flag, data] : _currentFilters) {
 			a_result[i++] = data.Label;
 			a_result[i++] = flag;
 			a_result[i++] = data.Priority;
+			a_result[i++] = data.IconSource;
+			a_result[i++] = data.IconLabel;
 		}
 	}
 

@@ -13,6 +13,7 @@ class skyui.components.list.ButtonListEntry extends BasicListEntry
 {
   /* PRIVATE VARIABLES */
 
+	private var _iconLabel: String;
 
   /* STAGE ELEMENTS */
 
@@ -68,12 +69,26 @@ class skyui.components.list.ButtonListEntry extends BasicListEntry
 		}
 
 		if (icon != undefined) {
-			if (a_entryObject.iconLabel != undefined) {
-				icon.gotoAndStop(a_entryObject.iconLabel);
+			if (a_entryObject.iconLabel != undefined && a_entryObject.iconLabel != "") {
+				if (a_entryObject.iconSource != undefined && a_entryObject.iconSource != "") {
+					_iconLabel = a_entryObject.iconLabel;
+
+					var iconLoader = new MovieClipLoader();
+					iconLoader.addListener(this);
+					iconLoader.loadClip(a_entryObject.iconSource, icon);
+				}
+				else {
+					icon.gotoAndStop(a_entryObject.iconLabel);
+				}
 			}
 			else {
 				icon._visible = false;
 			}
 		}
+	}
+
+	private function onLoadInit(a_icon: MovieClip): Void
+	{
+		a_icon.gotoAndStop(_iconLabel);
 	}
 }

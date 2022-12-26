@@ -78,14 +78,28 @@ namespace Data
 			for (auto& label : sections.getMemberNames()) {
 				Json::Value section = sections[label];
 
-				std::int32_t priority = 50;
+				std::int32_t priority = -1;
 				if (section.isMember("priority")) {
 					priority = std::min(std::max(section["priority"].asInt(), 0), 100);
 				}
 
 				auto keywords = GetKeywords(section["keywords"]);
 
-				categoryManager->AddSection(label, priority, std::move(keywords));
+				std::string iconSource;
+				std::string iconLabel;
+
+				Json::Value icon = section["icon"];
+				if (icon.isObject()) {
+					iconSource = icon["source"].asString();
+					iconLabel = icon["label"].asString();
+				}
+
+				categoryManager->AddSection(
+					label,
+					priority,
+					std::move(keywords),
+					iconSource,
+					iconLabel);
 			}
 		}
 
