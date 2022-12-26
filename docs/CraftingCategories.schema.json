@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Exit-9B/CraftingCategories/main/docs/CraftingCategories.schema.json",
+  "title": "Crafting Categories",
+  "description": "Defines categories for the Constructible Object menu",
+  "type": "object",
+  "properties": {
+    "sections": {
+      "description": "Defines top-level sections",
+      "type": "object",
+      "patternProperties": {
+        "^[^\\$]": {
+          "$ref": "#/$defs/section",
+          "description": "WARNING: String will not be localized",
+          "deprecated": true
+        },
+        "^\\$": {
+          "$ref": "#/$defs/section",
+          "description": "Defines a top-level section"
+        }
+      }
+    },
+    "categories": {
+      "description": "Defines sub-categories within sections",
+      "type": "object",
+      "patternProperties": {
+        "^[^\\$]": {
+          "$ref": "#/$defs/category",
+          "description": "WARNING: String will not be localized",
+          "deprecated": true
+        },
+        "^\\$": {
+          "$ref": "#/$defs/category",
+          "description": "Defines a sub-category within a section"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "section": {
+      "type": "object",
+      "properties": {
+        "priority": {
+          "description": "Global priority (0-100) which controls order relative to other sections",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 50
+        },
+        "keywords": {
+          "description": "Keywords which will assign items to this section if present",
+          "type": "array",
+          "items": {
+            "description": "Keyword EditorID",
+            "type": "string"
+          }
+        },
+        "icon": {
+          "description": "Specifies an icon to appear next to the section label",
+          "type": "object",
+          "properties": {
+            "source": {
+              "description": "Path to a SWF movie in the Interface directory containing icons",
+              "type": "string",
+              "default": "craftingcategories/icons.swf"
+            },
+            "label": {
+              "description": "Frame label in the timeline to display",
+              "type": "string"
+            }
+          },
+          "required": ["label"]
+        }
+      }
+    },
+    "category": {
+      "type": "object",
+      "properties": {
+        "section": {
+          "description": "The parent section which the category is nested under",
+          "type": "string"
+        },
+        "keywords": {
+          "description": "Keywords which will assign items to this category if present",
+          "type": "array",
+          "items": {
+            "description": "Keyword EditorID",
+            "type": "string"
+          }
+        }
+      },
+      "required": ["section"]
+    }
+  }
+}

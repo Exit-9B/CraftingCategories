@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/CraftingCategories/main/docs/CraftingCategories.schema.json",
   "categories": {
     "$Falmer": {
       "section": "$WEAPONS & ARMOR",
