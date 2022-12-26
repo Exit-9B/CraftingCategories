@@ -5,7 +5,13 @@ $MISC	MISC
 $WEAPONS & ARMOR	WEAPONS & ARMOR
 $Amber	Amber
 $Ancient Nord	Ancient Nord
-$BuildingMaterials	Building Materials
+$Building Materials	Building Materials
+$Containers	Containers
 $Dragon	Dragon
+$Exterior	Exterior
+$Furniture	Furniture
+$House	House
 $Madness	Madness
 $Ordinator	Ordinator
+$Shelves	Shelves
+$Weapon Racks	Weapon Racks

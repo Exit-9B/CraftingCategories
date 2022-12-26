@@ -10,7 +10,7 @@
     "$Furniture": {
       "keywords": [ "BYOHHouseCraftingCategoryFurniture" ]
     },
-    "$WeaponRacks": {
+    "$Weapon Racks": {
       "keywords": [ "BYOHHouseCraftingCategoryWeaponRacks" ]
     },
     "$Shelves": {
@@ -19,7 +19,7 @@
     "$Exterior": {
       "keywords": [ "BYOHHouseCraftingCategoryExterior" ]
     },
-    "$BuildingMaterials": {
+    "$Building Materials": {
       "keywords": [ "BYOHHouseCraftingCategorySmithing" ]
     }
   }
