@@ -14,8 +14,7 @@ list(APPEND CMAKE_MODULE_PATH
 )
 include(SKSEPlugin)
 
-set(SKSE_USE_XBYAK OFF)
-set(SKSE_SUPPORT_VR OFF)
+set(SKSE_SUPPORT_VR ON)
 
 SKSEPlugin_Add(
 	${PROJECT_NAME}
@@ -70,12 +69,21 @@ source_group(
 		${CONFIGS}
 )
 
-install(
-	FILES
-		"${PROJECT_SOURCE_DIR}/data/Interface/constructibleobjectmenu.swf"
-	DESTINATION
-		"Interface"
-)
+if(NOT BUILD_SKYRIMVR)
+	install(
+		FILES
+			"${PROJECT_SOURCE_DIR}/data/SkyrimSE/Interface/constructibleobjectmenu.swf"
+		DESTINATION
+			"Interface"
+	)
+else()
+	install(
+		FILES
+			"${PROJECT_SOURCE_DIR}/data/SkyrimVR/Interface/constructibleobjectmenu.swf"
+		DESTINATION
+			"Interface"
+	)
+endif()
 
 install(
 	FILES
@@ -100,5 +108,8 @@ install(
 
 set(CPACK_GENERATOR "7Z")
 set(CPACK_PACKAGE_FILE_NAME ${PROJECT_NAME}-${PROJECT_VERSION})
+if(BUILD_SKYRIMVR)
+	string(APPEND CPACK_PACKAGE_FILE_NAME "-VR")
+endif()
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY FALSE)
 include(CPack)

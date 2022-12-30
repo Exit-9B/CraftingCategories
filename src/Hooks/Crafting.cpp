@@ -13,13 +13,13 @@ namespace Hooks
 
 	void Crafting::LoadMoviePatch()
 	{
-		static const auto hook1 = REL::Relocation<std::uintptr_t>(
+		static const auto hook1 = util::MakeHook(
 			RE::Offset::TESObjectREFR::ActivateCraftingWorkBench,
 			0xE);
 
-		static const auto hook2 = REL::Relocation<std::uintptr_t>(
+		static const auto hook2 = util::MakeHook(
 			RE::Offset::CraftingMenu::Ctor,
-			0xA9);
+			IF_SKYRIMSE(0xA9, 0x70));
 
 		if (!REL::make_pattern<"E8">().match(hook1.address()) ||
 			!REL::make_pattern<"E8">().match(hook2.address())) {
@@ -33,9 +33,9 @@ namespace Hooks
 
 	void Crafting::CustomCategoryPatch()
 	{
-		static const auto hook = REL::Relocation<std::uintptr_t>(
+		static const auto hook = util::MakeHook(
 			RE::Offset::CraftingSubMenus::ConstructibleObjectMenu::UpdateItemList,
-			0x2C8);
+			IF_SKYRIMSE(0x2C8, 0x22D));
 
 		if (!REL::make_pattern<"E8">().match(hook.address())) {
 			util::report_and_fail("Failed to install Crafting::CustomCategoryPatch"sv);

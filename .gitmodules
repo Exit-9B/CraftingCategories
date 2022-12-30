@@ -7,3 +7,6 @@
 [submodule "external/skyui"]
 	path = external/skyui
 	url = https://github.com/Exit-9B/skyui.git
+[submodule "external/skyui-vr"]
+	path = external/skyui-vr
+	url = https://github.com/Exit-9B/skyui.git
