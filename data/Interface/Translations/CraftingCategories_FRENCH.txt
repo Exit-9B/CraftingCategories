@@ -1,0 +1,17 @@
+$CLOTHING	VÊTEMENTS
+$FOOD	NOURRITURE
+$JEWELRY	BIJOUX
+$MISC	DIVERS
+$WEAPONS & ARMOR	ARME & ARMURE
+$Amber	Ambre
+$Ancient Nord	Nordique
+$Building Materials	Matériaux de construction
+$Containers	Contenants
+$Dragon	Dragon
+$Exterior	Extérieur
+$Furniture	Meubles
+$House	Maison
+$Madness	Madness
+$Ordinator	Ordinator
+$Shelves	Étagères
+$Weapon Racks	Râteliers d'armes
