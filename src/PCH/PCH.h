@@ -16,8 +16,6 @@ namespace logger = SKSE::log;
 namespace util
 {
 	using SKSE::stl::report_and_fail;
-	using SKSE::stl::utf8_to_utf16;
-	using SKSE::stl::utf16_to_utf8;
 
 	inline auto MakeHook(REL::ID a_id, std::ptrdiff_t a_offset = 0)
 	{

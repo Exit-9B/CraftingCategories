@@ -4,11 +4,6 @@ namespace RE
 {
 	namespace Offset
 	{
-		namespace BSScaleformTranslator
-		{
-			inline static constexpr auto GetCachedString = MAKE_OFFSET(69188, 0xC6E830);
-		}
-
 		namespace CraftingMenu
 		{
 			inline static constexpr auto Ctor = MAKE_OFFSET(51361, 0x88DE80);
