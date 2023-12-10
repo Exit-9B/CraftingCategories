@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 
 project(
 	CraftingCategories
-	VERSION 1.0.1
+	VERSION 1.0.2
 	LANGUAGES CXX
 )
 
@@ -34,7 +34,7 @@ find_package(tsl-ordered-map CONFIG REQUIRED)
 target_link_libraries(
 	${PROJECT_NAME}
 	PRIVATE
-		jsoncpp_static
+		JsonCpp::JsonCpp
 		tsl::ordered_map
 )
 
