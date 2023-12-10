@@ -4,9 +4,9 @@
 #include <SKSE/SKSE.h>
 
 #ifdef NDEBUG
-#	include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/basic_file_sink.h>
 #else
-#	include <spdlog/sinks/msvc_sink.h>
+#include <spdlog/sinks/msvc_sink.h>
 #endif
 
 using namespace std::literals;
@@ -27,6 +27,19 @@ namespace util
 		return REL::Relocation<std::uintptr_t>(a_address.address() + a_offset);
 	}
 }
+
+struct comp_str_cis
+{
+	bool operator()(const std::string& a_lhs, const std::string& a_rhs) const
+	{
+		return ::_stricmp(a_lhs.c_str(), a_rhs.c_str()) < 0;
+	}
+};
+
+using Keyword = std::string;
+template <typename V>
+using KeywordMap = std::map<Keyword, V, comp_str_cis>;
+using KeywordSet = std::set<Keyword, comp_str_cis>;
 
 #ifndef SKYRIMVR
 #define IF_SKYRIMSE(a_resultSE, a_resultVR) a_resultSE

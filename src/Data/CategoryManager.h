@@ -7,24 +7,22 @@ namespace Data
 	class CategoryManager final
 	{
 	public:
-		using Keyword = RE::BGSKeyword*;
-
 		struct Category
 		{
 			std::string Label;
-			std::set<Keyword> Keywords;
+			KeywordSet Keywords;
 		};
 
 		struct Section
 		{
 			std::string Label;
 			std::int32_t Priority = 50;
-			std::set<Keyword> Keywords;
+			KeywordSet Keywords;
 			std::string IconSource = "craftingcategories/icons.swf";
 			std::string IconLabel = "default";
 
 			tsl::ordered_map<std::string, Category> Categories;
-			std::map<Keyword, Category*> CategoryKeywords;
+			KeywordMap<Category*> CategoryKeywords;
 		};
 
 		static CategoryManager* GetSingleton();
@@ -38,14 +36,14 @@ namespace Data
 		void AddSection(
 			const std::string& a_label,
 			std::int32_t a_priority,
-			std::set<Keyword>&& a_keywords,
+			KeywordSet&& a_keywords,
 			const std::string& a_iconSource,
 			const std::string& a_iconLabel);
 
 		void AddCategory(
 			const std::string& a_label,
 			const std::string& a_section,
-			std::set<Keyword>&& a_keywords);
+			KeywordSet&& a_keywords);
 
 		void ProcessEntry(RE::GFxValue& a_entryObject, RE::TESForm* a_form);
 

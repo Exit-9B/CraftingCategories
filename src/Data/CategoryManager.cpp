@@ -18,7 +18,7 @@ namespace Data
 	void CategoryManager::AddSection(
 		const std::string& a_label,
 		std::int32_t a_priority,
-		std::set<Keyword>&& a_keywords,
+		KeywordSet&& a_keywords,
 		const std::string& a_iconSource,
 		const std::string& a_iconLabel)
 	{
@@ -74,7 +74,7 @@ namespace Data
 	void CategoryManager::AddCategory(
 		const std::string& a_label,
 		const std::string& a_section,
-		std::set<Keyword>&& a_keywords)
+		KeywordSet&& a_keywords)
 	{
 		auto& section = _sections[a_section];
 		auto& category = section.Categories[a_label];
@@ -103,9 +103,10 @@ namespace Data
 		_sectionFlags.try_emplace(assignedSection, MiscSectionFlag);
 
 		if (keywordForm) {
-			auto hasKeyword = [keywordForm](RE::BGSKeyword* keyword)
+			auto hasKeyword = [keywordForm](std::string_view keywordString)
 			{
-				return keywordForm->HasKeyword(keyword);
+				const auto keyword = RE::TESForm::LookupByEditorID<RE::BGSKeyword>(keywordString);
+				return keyword && keywordForm->HasKeyword(keyword);
 			};
 
 			for (auto s = _sections.rbegin(); s != _sections.rend(); ++s) {

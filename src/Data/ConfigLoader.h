@@ -24,6 +24,6 @@ namespace Data
 	private:
 		ConfigLoader() = default;
 
-		std::set<RE::BGSKeyword*> GetKeywords(Json::Value a_json);
+		KeywordSet GetKeywords(Json::Value a_json);
 	};
 }

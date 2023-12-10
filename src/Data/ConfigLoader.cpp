@@ -117,18 +117,12 @@ namespace Data
 		}
 	}
 
-	std::set<RE::BGSKeyword*> ConfigLoader::GetKeywords(Json::Value a_json)
+	KeywordSet ConfigLoader::GetKeywords(Json::Value a_json)
 	{
-		std::set<RE::BGSKeyword*> keywords;
+		KeywordSet keywords;
 		if (a_json.isArray()) {
 			for (auto& id : a_json) {
-				auto keyword = RE::TESForm::LookupByEditorID<RE::BGSKeyword>(id.asString());
-				if (keyword) {
-					keywords.insert(keyword);
-				}
-				else {
-					logger::warn("Failed to lookup keyword: {}"sv, id.asString());
-				}
+				keywords.insert(id.asString());
 			}
 		}
 
