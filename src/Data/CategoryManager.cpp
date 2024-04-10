@@ -105,19 +105,17 @@ namespace Data
 		if (keywordForm) {
 			auto hasKeyword = [keywordForm](std::string_view keywordString)
 			{
-				const auto keywordA = RE::TESForm::LookupByEditorID<RE::BGSKeyword>(keywordString);
-				if (keywordA) {
-					return keywordForm->HasKeyword(keyword);
-				}
-				if (static auto tesDataHandler = RE::TESDataHandler::GetSingleton(); tesDataHandler) {
-					auto& keywordArray = tesDataHandler->GetFormArray<RE::BGSKeyword>();
-					for (auto& keywordB : keywordArray) {
-						if (::_stricmp(keywordB->formEditorID.data(), keywordString.data()) == 0) {
-							return keywordForm->HasKeyword(keywordB);
-						}
-					}
-				}
-				return false;
+				const auto keywords = std::span(keywordForm->keywords, keywordForm->numKeywords);
+				return std::ranges::any_of(
+					keywords,
+					[&](auto&& keyword)
+					{
+						return keyword->formEditorID.size() == keywordString.size() &&
+							::_strnicmp(
+								keyword->formEditorID.data(),
+								keywordString.data(),
+								keywordString.size()) == 0;
+					});
 			};
 
 			for (auto s = _sections.rbegin(); s != _sections.rend(); ++s) {
